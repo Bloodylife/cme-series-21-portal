@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b2d">
+  <meta name="description" content="CME Series '21 proposal and shared voting portal at RUET.">
+  <title>CME ’21 | Our Identity. Our Legacy.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a href="#proposals" class="skip-link">Skip to proposals</a>
+  <noscript><p class="notice">Enable JavaScript to browse proposals and use student voting.</p></noscript>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="CME Series 21 home">
+      <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+      <span class="brand-copy"><strong>CME <em>’21</em></strong><small>RUET · CERAMIC & METALLURGICAL ENGINEERING</small></span>
+    </a>
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="#proposals">Proposals</a>
+      <a href="#submit">Suggest a name</a>
+      <a href="#how-it-works">How it works</a>
+    </nav>
+    <button class="button button-quiet button-small" id="headerAccountBtn" type="button">Student access</button>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> THE CME ’21 NAMING PROJECT</div>
+        <h1>Many voices.<br>One <span>identity.</span></h1>
+        <p class="hero-lead">Forged by our journey. Named by us. Help choose the name that will carry Ceramic & Metallurgical Engineering, Series ’21, into everything that comes next.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#proposals">Explore proposals <span aria-hidden="true">↗</span></a>
+          <a class="button button-outline" href="#submit">Propose a name</a>
+        </div>
+        <div class="hero-meta"><span class="meta-line"></span><span>RUET · 59 eligible students · One shared choice</span></div>
+      </div>
+      <div class="hero-art" aria-label="Abstract crystalline material lattice illustration" role="img">
+        <span class="art-kicker">THE ELEMENT OF TOGETHERNESS</span>
+        <span class="art-year">21</span>
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div>
+        <div class="crystal crystal-main"><span></span></div>
+        <div class="crystal crystal-small crystal-left"></div><div class="crystal crystal-small crystal-right"></div>
+        <div class="node node-one"></div><div class="node node-two"></div><div class="node node-three"></div><div class="node node-four"></div>
+        <div class="art-caption"><span>SERIES ’21</span><i></i><span>STRONGER IN STRUCTURE. TOGETHER.</span></div>
+      </div>
+    </section>
+
+    <section class="stats wrap" aria-label="Live voting statistics">
+      <div class="stat-card"><span class="stat-label">APPROVED PROPOSALS</span><strong id="statProposals">—</strong><span class="stat-note">Ready for the batch to review</span></div>
+      <div class="stat-card"><span class="stat-label">VOTES CAST</span><strong id="statVotes">—</strong><span class="stat-note" id="participationNote">Shared results, across every device</span></div>
+      <div class="stat-card"><span class="stat-label">YOUR CURRENT VOTE</span><strong id="statMyVote">—</strong><span class="stat-note" id="myVoteNote">Sign in to see your selection</span></div>
+    </section>
+
+    <section class="notice wrap" id="setupNotice" hidden>
+      <div class="notice-icon">i</div><div><strong>The naming portal is getting ready</strong><p>Browsing, submissions, and voting will open once the organizers connect the shared voting service.</p></div>
+    </section>
+
+    <section class="section wrap" id="proposals">
+      <div class="section-head">
+        <div><div class="eyebrow">THE SHORTLIST</div><h2>Names on the table<span class="title-period">.</span></h2><p class="section-lead">Explore the approved names, compare their meaning, and cast or change your vote.</p></div>
+        <div class="sort-control"><label for="sortSelect">Sort by</label><select id="sortSelect"><option value="votes">Most votes</option><option value="name">Name A–Z</option><option value="newest">Recently added</option></select></div>
+      </div>
+      <div class="browse-tools">
+        <div class="search-field"><label class="sr-only" for="searchInput">Search names, meanings, or taglines</label><span aria-hidden="true">⌕</span><input type="search" id="searchInput" placeholder="Find a name, a meaning, a spark…" maxlength="150"></div>
+        <div class="category-filter"><label class="sr-only" for="categoryFilter">Filter by category</label><select id="categoryFilter"><option value="">All categories</option><option>Materials science</option><option>Bangla / cultural</option><option>Values & identity</option><option>Nature & science</option><option>Other</option></select></div>
+      </div>
+      <div class="filter-row"><span class="live-pill" id="connectionBadge"><span></span><b id="connectionLabel">CONNECTING</b></span><span class="refresh-note" id="lastUpdated" role="status">Waiting for data</span><button class="text-button" id="refreshBtn" type="button">↻ Refresh</button></div>
+      <div class="results-caption"><span id="resultCount" role="status">The next chapter starts with an idea.</span><span>Select up to 3 names to compare</span></div>
+      <div id="proposalGrid" class="proposal-grid"><div class="empty-state"><div class="empty-symbol">◇</div><h3>Connect to see the shortlist</h3><p>Once the shared database is connected, approved proposals will appear here.</p></div></div>
+      <div id="proposalError" class="inline-message error-message" role="alert" hidden></div>
+      <div class="current-vote" id="currentVotePanel" hidden><div><span class="eyebrow">YOUR CHOICE</span><strong id="currentVoteName"></strong><p>Select another name at any time while voting is open.</p></div><button type="button" class="text-button" id="withdrawBtn">Withdraw vote</button></div>
+    </section>
+
+    <section class="section submit-section" id="submit">
+      <div class="wrap submit-layout">
+        <div class="submit-copy"><div class="eyebrow">ADD YOUR PERSPECTIVE</div><h2>Have a name<br>worth remembering<span class="title-period">?</span></h2><p>Suggest a name that reflects our discipline, our journey, or the bond we share. Every submission is reviewed before it appears on the public shortlist.</p>
+          <div class="process-list"><div><span>01</span><p><strong>Submit an idea</strong><small>Explain the name and what it represents.</small></p></div><div><span>02</span><p><strong>Review & approval</strong><small>Submissions are checked before publishing.</small></p></div><div><span>03</span><p><strong>Vote together</strong><small>Each eligible student can maintain one active vote.</small></p></div></div>
+        </div>
+        <form id="proposalForm" class="proposal-form">
+          <div class="form-top"><div><span class="form-index">PROPOSAL FORM</span><h3>Make it meaningful.</h3></div><span class="form-lock">STUDENT ACCESS REQUIRED</span></div>
+          <div class="form-grid">
+            <div class="field field-full"><label for="proposerName">Your name <span>*</span></label><input id="proposerName" name="proposerName" maxlength="100" required placeholder="Full name as used at RUET"></div>
+            <div class="field field-full"><label for="proposedName">Proposed batch name <span>*</span></label><input id="proposedName" name="proposedName" maxlength="100" required placeholder="A memorable name"></div>
+            <div class="field field-full"><label for="tagline">Tagline <small>(optional)</small></label><input id="tagline" name="tagline" maxlength="180" placeholder="A short phrase that captures the idea"></div>
+            <div class="field field-full"><label for="meaning">Meaning & rationale <span>*</span></label><textarea id="meaning" name="meaning" rows="4" maxlength="1500" required placeholder="What does the name mean, and why does it fit our batch?"></textarea><div class="field-foot"><span>Be clear and respectful.</span><span id="meaningCount">0 / 1500</span></div></div>
+            <div class="field field-full"><label for="category">Name category</label><select id="category" name="category"><option value="Materials science">Materials science</option><option value="Bangla / cultural">Bangla / cultural</option><option value="Values & identity">Values & identity</option><option value="Nature & science">Nature & science</option><option value="Other">Other</option></select></div>
+          </div>
+          <button class="button button-primary button-wide" id="submitProposalBtn" type="submit">Submit for review <span aria-hidden="true">↗</span></button>
+          <p class="form-disclaimer">Your name and proposal become public after approval. Your student ID stays private. Please do not include contact details.</p>
+          <div id="proposalFormMessage" class="form-message" role="status" hidden></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="section wrap pending-section" id="mySubmissions" hidden>
+      <div class="section-head"><div><div class="eyebrow">YOUR CONTRIBUTIONS</div><h2>Pending review<span class="title-period">.</span></h2><p class="section-lead">Only you can see your pending proposals here. Approved proposals move to the public shortlist.</p></div></div>
+      <div id="pendingList" class="pending-list"></div>
+    </section>
+
+    <section class="section wrap how-section" id="how-it-works">
+      <div class="section-head"><div><div class="eyebrow">A CLEAR PROCESS</div><h2>How it works<span class="title-period">.</span></h2></div></div>
+      <div class="how-grid"><article><span class="how-number">01</span><h3>Verify your student access</h3><p>Use your student ID and individually issued access code. Keep your code private.</p></article><article><span class="how-number">02</span><h3>Submit or explore</h3><p>Suggest an original name or read the proposals approved by the organizers.</p></article><article><span class="how-number">03</span><h3>Cast one active vote</h3><p>Your vote is stored centrally. Choosing another name changes your current selection.</p></article></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="wrap footer-inner"><a class="brand footer-brand" href="#top"><span class="brand-mark"><span></span><span></span><span></span><span></span></span><span class="brand-copy"><strong>CME <em>’21</em></strong><small>RUET · BANGLADESH</small></span></a><p>A shared name. A lasting connection.</p><button class="text-button" id="footerAccountBtn" type="button">Student access</button></div><div class="wrap footer-bottom"><span>© CME Series ’21 · An informal batch poll</span><span>Votes are visible to trusted organizers. Keep your access code private.</span></div></footer>
+
+  <div class="modal-backdrop" id="loginModal" hidden>
+    <section class="login-modal" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <button class="modal-close" id="closeLoginBtn" type="button" aria-label="Close">×</button>
+      <div class="login-emblem"><span class="brand-mark"><span></span><span></span><span></span><span></span></span></div>
+      <div class="eyebrow">PRIVATE STUDENT ACCESS</div><h2 id="loginTitle">Welcome back<span class="title-period">.</span></h2><p class="login-lead">Enter your assigned ID and private access code to vote or submit a proposal.</p>
+      <form id="loginForm"><div class="field"><label for="studentCode">Student ID <span>*</span></label><input id="studentCode" name="studentCode" inputmode="numeric" autocomplete="username" maxlength="7" pattern="2106[0-9]{3}" required placeholder="e.g. 2106001"></div><div class="field"><label for="accessCode">Private access code <span>*</span></label><input type="password" id="accessCode" name="accessCode" autocomplete="current-password" minlength="8" maxlength="32" required placeholder="Enter your assigned code"></div><button class="button button-primary button-wide" id="loginBtn" type="submit">Verify & continue <span aria-hidden="true">→</span></button><div id="loginMessage" class="form-message" role="alert" hidden></div></form>
+      <p class="security-note"><span>●</span> Never share your access code. Organizers should distribute codes privately.</p>
+    </section>
+  </div>
+
+  <div class="compare-bar" id="compareBar" hidden><span><strong id="compareCount">0</strong> names selected</span><button class="text-button" id="clearCompareBtn" type="button">Clear</button><button class="button button-primary button-small" id="compareBtn" type="button">Compare names ↗</button></div>
+  <div class="modal-backdrop" id="compareModal" hidden><section class="compare-modal" role="dialog" aria-modal="true" aria-labelledby="compareTitle"><button class="modal-close" id="closeCompareBtn" aria-label="Close comparison" type="button">×</button><div class="eyebrow">SIDE BY SIDE</div><h2 id="compareTitle">Find what resonates.</h2><p>Look beyond the name. Compare the ideas behind each proposal.</p><div class="compare-grid" id="compareGrid"></div></section></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><span class="toast-mark">✓</span><span id="toastText"></span></div>
+</body>
+</html>

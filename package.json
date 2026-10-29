@@ -1,0 +1,10 @@
+{
+  "name": "cme-series-21-portal",
+  "version": "2.0.0",
+  "private": true,
+  "description": "CME Series 21 shared naming and voting portal",
+  "scripts": {
+    "test": "node --test tests/backend.test.cjs",
+    "preview": "node preview.cjs"
+  }
+}
